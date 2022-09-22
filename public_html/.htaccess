@@ -1,0 +1,14 @@
+<if "%{QUERY_STRING} =~ /admin/">
+    # Auth stuff for admin page
+    Order Deny,Allow
+    AuthUserFile /var/www/solyuf.offthegridcg.me/.htpasswd
+    AuthName "Restricted file - Authentication required"
+    AuthType Basic
+    Require user admin
+    Satisfy All
+</if>
+
+ErrorDocument 401 /?epage=401
+ErrorDocument 403 /?epage=403
+ErrorDocument 404 /?epage=404
+ErrorDocument 500 /?epage=500

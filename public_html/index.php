@@ -29,7 +29,7 @@ require_once "../private_html/modules/head.php";
             }
             else
             {
-                require_once "../private_html/pages/error/404.php";
+                require_once "../private_html/pages/error/404.html";
             }
         }
         else
@@ -39,11 +39,11 @@ require_once "../private_html/modules/head.php";
     }
     else if (!isset($_GET['epage']))
     {
-        require_once "../private_html/pages/error/".http_response_code().".php";
+        require_once "../private_html/pages/error/".http_response_code().".html";
     }
     else
     {
-        require_once "../private_html/pages/error/".$_GET['epage'].".php";
+        require_once "../private_html/pages/error/".$_GET['epage'].".html";
     }
     
     include_once "../private_html/modules/footer.php";

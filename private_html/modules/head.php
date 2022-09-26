@@ -12,4 +12,16 @@
     <title>Soly UF Webshop</title>
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/master.css">
+
+    <?php
+    if (isset($_GET['page']))
+    {
+        if (file_exists("static/css/".$_GET['page'].".css"))
+        {
+            ?>
+                <link rel="stylesheet" href="static/css/<?=$_GET['page']?>.css">
+            <?php
+        }
+    }
+    ?>
 </head>

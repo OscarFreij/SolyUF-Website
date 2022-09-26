@@ -1,3 +1,6 @@
 todo
 .htpasswd
 .wakatime-project
+.access.json
+composer.lock
+vendor

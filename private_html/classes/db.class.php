@@ -26,42 +26,26 @@ class db
             throw new Exception("PDO Connection Error: ".$e->getMessage(), 1);
         }   
     }
-
-    public function constructQuerry($querry)
-    {
-        try 
-        {
-            $this->pdo->exec($querry);
-        }
-        catch(PDOException $e)
-        {
-            throw new Exception("PDO Querry Error: ".$e->getMessage(), 1);
-            return false;
-        }  
-        return true;
-    }
     
-    public function constructResultQuerry($querry)
+    public function GetPreparedStatement($statementName)
     {
-        try 
-        {
-            $stmt = $this->pdo->prepare($querry);
-            $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+        switch ($statementName) {
+            case 'getItem':
+                $stmtString = "SELECT * FROM items WHERE ´id´ = :id";
+                break;
+            case 'getItems':
+                $stmtString = "SELECT * FROM items WHERE 1";
+                break;
+            case 'createItem':
+                $stmtString = "INSERT INTO items (name, description, image, price) VALUES (:name, :description, :image, :price)";
+                break;
+            case 'deleteItems':
+                $stmtString = "DELETE FROM items WHERE ´id´ = :id";
+                break;
         }
-        catch(PDOException $e)
-        {
-            throw new Exception("PDO Querry Error: ".$e->getMessage(), 1);
-            return false;
-        }  
-        return $result;
-    }
 
-    public function quote($string)
-    {
-        return $this->pdo->quote($string);
+        $stmt = $this->pdo->prepare($stmtString);
+        return $stmt;
     }
-    
 }
 ?>

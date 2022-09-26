@@ -21,7 +21,75 @@ class functions
         $this->container = $container;    
     }
 
-    #region Item Mgmt
+    #region Items
+    public function CreateItem($name, $description, $image, $price)
+    {
+        try
+        {
+            $stmt = $this->container->DB()->GetPreparedStatement('createItem');
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':price', $price);
+            $stmt->execute();
+            echo "New record created successfully";
+        }
+        catch(PDOException $e)
+        {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function GetItems()
+    {
+        try
+        {
+            $stmt = $this->container->DB()->GetPreparedStatement('getItems');
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            echo count($result)." record/s selected successfully";
+        }
+        catch(PDOException $e)
+        {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function GetItem($id)
+    {
+        try
+        {
+            $stmt = $this->container->DB()->GetPreparedStatement('getItem');
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            echo count($result)." record/s selected successfully";
+        }
+        catch(PDOException $e)
+        {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function DeleteItem($id)
+    {
+        try
+        {
+            $stmt = $this->container->DB()->GetPreparedStatement('deleteItem');
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            echo "Record successfully deleted";
+        }
+        catch(PDOException $e)
+        {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    #endregion
+
+    #region Orders
 
     #endregion
 

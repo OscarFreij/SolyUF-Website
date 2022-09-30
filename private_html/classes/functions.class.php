@@ -99,7 +99,7 @@ class functions
     {
         $credArray = $this->container->credentials()->getMailCredentials();
         $to = $data['email'];
-        $reciver = $credArray['oauthUserEmail'];
+        $reciver = $credArray['emailReceivers'];
         $phone = $data['phone'];
         #$msg = $data['msg'];
 

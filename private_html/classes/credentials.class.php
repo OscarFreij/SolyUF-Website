@@ -18,7 +18,7 @@ class credentials
 
     public function getMailCredentials()
     {
-        $data = $this->readFileData("../private_html/access.json");
+        $data = $this->readFileData("../private_html/.access.json");
         $this->mailCredentials = array("oauthUserEmail" => $data->oauthUserEmail,"oauthClientId" => $data->oauthClientId,"oauthClientSecret" => $data->oauthClientSecret,"oauthRefreshToken" => $data->oauthRefreshToken, "emailReceivers" => $data->emailReceivers);
         return $this->mailCredentials;
     }

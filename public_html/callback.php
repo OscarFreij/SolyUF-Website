@@ -16,3 +16,8 @@ if (isset($_SERVER['PHP_AUTH_USER']))
 }
 
 // Callback functions that require no authentication.
+
+if (isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['message']))
+{
+    $container->functions()->sendFormEmail(array("email"=>$_POST['email'], "phone"=>$_POST['phone'], "msg"=>$_POST['message']));
+}

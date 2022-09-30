@@ -12,3 +12,9 @@ ErrorDocument 401 /?epage=401
 ErrorDocument 403 /?epage=403
 ErrorDocument 404 /?epage=404
 ErrorDocument 500 /?epage=500
+
+# Deny access to .htaccess
+<Files token.php>
+Order allow,deny
+Deny from all
+</Files>

@@ -23,7 +23,7 @@ class db
         }
         catch(PDOException $e)
         {
-            throw new Exception("PDO Connection Error: ".$e->getMessage(), 1);
+            throw new Exception("PDO Connection Error: ".$e->getMessage(), 200);
         }   
     }
     
@@ -31,7 +31,7 @@ class db
     {
         switch ($statementName) {
             case 'getItem':
-                $stmtString = "SELECT * FROM items WHERE ´id´ = :id";
+                $stmtString = "SELECT * FROM items WHERE `id` = :id";
                 break;
             case 'getItems':
                 $stmtString = "SELECT * FROM items WHERE 1";
@@ -40,8 +40,26 @@ class db
                 $stmtString = "INSERT INTO items (name, description, image, price) VALUES (:name, :description, :image, :price)";
                 break;
             case 'deleteItems':
-                $stmtString = "DELETE FROM items WHERE ´id´ = :id";
+                $stmtString = "DELETE FROM items WHERE `id` = :id";
                 break;
+            case 'getOrder':
+                $stmtString = "SELECT * FROM orders WHERE `id` = :id";
+                break;
+            case 'getOrders':
+                $stmtString = "SELECT * FROM orders WHERE 1";
+                break;    
+            case 'createOrder':
+                $stmtString = "INSERT INTO orders (email, phonenumber, adress, postnumber, city, orderData) VALUES (:name, :phonenumber, :postnumber, :city, :orderData)";
+                break;
+            case 'toggleOrderPaid':
+                $stmtString = "UPDATE orders SET paid = (:paid) WHERE id = :id";
+                break;
+            case 'toggleOrderSent':
+                $stmtString = "UPDATE orders SET sent = (:sent) WHERE id = :id";
+                break;
+            default:
+                throw new Exception("No prepared statement with matching name - (statementName):$statementName", 210);
+                return;
         }
 
         $stmt = $this->pdo->prepare($stmtString);

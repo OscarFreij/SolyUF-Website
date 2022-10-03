@@ -9,8 +9,12 @@ use PHPMailer\PHPMailer\OAuth;
 //Alias the League Google OAuth2 provider class
 use League\OAuth2\Client\Provider\Google;
 
+//Import QRCode generator
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
+
 //Load Composer's autoloader
-require '../private_html/vendor/autoload.php';
+require_once '../private_html/vendor/autoload.php';
 
 class functions
 {
@@ -191,5 +195,15 @@ class functions
     }
 
     #endregion
+
+    #region QR Code
+
+    public function GenerateQRCode(string $phone, int $price, int $orderId)
+    {
+        $data = "C$phone;$price;Soly UF - Order#$orderId;0";
+        return (new QRCode)->render($data);
+    }
+    #endregion
+
 }
 ?>

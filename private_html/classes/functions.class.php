@@ -102,32 +102,58 @@ class functions
     public function sendFormEmail(Array $data)
     {
         $credArray = $this->container->credentials()->getMailCredentials();
-        $to = $data['email'];
+        $email = $data['email'];
         $reciver = $credArray['emailReceivers'];
-        $phone = $data['phone'];
-        #$msg = $data['msg'];
-
+        $phonenumber = $data['phone'];
         $subject = "Meddelande från solyuf.offthegridcg.me :-)";
+        $message = htmlspecialchars($data['msg'], ENT_SUBSTITUTE);
+        ob_start();
+        include "../private_html/templates/mail/contactFormSent.php";
+        $msg = ob_get_clean();
+        $this->SendEmail($email, $reciver, $subject, $msg, $credArray);
+    }
 
-        #TEMPORARY#
+    public function sendOrderPaidEmail(int $orderId, string $email)
+    {
+        $subject = "Soly UF - Betalning bekreftad - Order #$orderId";
+        
+        ob_start();
+        include "../private_html/templates/mail/orderPaid.php";
+        $msg = ob_get_clean();
+        $this->SendEmail(null, $email, $subject, $msg);
+    }
 
-        $msg = "
-        <html>
-        <head>
-        <title>HTML email</title>
-        </head>
-        <body>
-        <p>
-        Kontaktinformation: <a href='mailto:$to'>$to</a> :: <a href='tel:$phone'>$phone</a>
-        </p>
-        <p>
-        ".htmlspecialchars($data['msg'], ENT_SUBSTITUTE)."
-        </p>
-        </body>
-        </html>
-        ";
+    public function sendOrderPlacedEmail(int $orderId, string $email, string $phonenumber, string $address, string $postalcode, string $city, string $orderTableRows)
+    {
+        $subject = "Soly UF - Beställning registrerad - Order #$orderId";
+        
+        ob_start();
+        include "../private_html/templates/mail/orderPlaced.php";
+        $msg = ob_get_clean();
+        $this->SendEmail(null, $email, $subject, $msg);
+    }
 
-        #TEMPORARY#
+    public function sendOrderSentEmail(int $orderId, string $email, string $address, string $postalcode, string $city)
+    {
+        $subject = "Soly UF - Beställning skickad - Order #$orderId";
+        
+        ob_start();
+        include "../private_html/templates/mail/orderPlaced.php";
+        $msg = ob_get_clean();
+        $this->SendEmail(null, $email, $subject, $msg);
+    }
+
+    private function SendEmail(string $reply = null, string $destination, string $subject, string $message, array $credArray = null)
+    {
+        if (is_null($credArray))
+        {
+            $credArray = $this->container->credentials()->getMailCredentials();
+        }
+
+        if (is_null($reply))
+        {
+            $reply = $credArray['oauthUserEmail'];
+        }
 
         //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer(true);
@@ -140,8 +166,6 @@ class functions
             $mail->CharSet    = "UTF-8";                            //Set mail charset
             $mail->Host       = 'smtp.gmail.com';                   //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                               //Enable SMTP authentication
-            #$mail->Username   = $credArray['username'];             //SMTP username
-            #$mail->Password   = $credArray['password'];             //SMTP password
             $mail->AuthType = 'XOAUTH2';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;        //Enable implicit TLS encryption
             $mail->Port       = 465;                                //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
@@ -177,18 +201,18 @@ class functions
 
 
             //Recipients
-            $mail->setFrom($credArray['oauthUserEmail'], "Knifetownburgers ".substr($credArray['oauthUserEmail'], 0, strpos($credArray['oauthUserEmail'], '.') ));
-            $mail->addAddress("$reciver");
-            $mail->addReplyTo("$to");
+            $mail->setFrom($credArray['oauthUserEmail'], "Soly UF ");
+            $mail->addAddress("$destination");
+            $mail->addReplyTo("$reply");
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = $subject;
-            $mail->Body    = $msg;
+            $mail->Body    = $message;
             //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
-            error_log("Successfully sent email to $reciver");
+            error_log("Successfully sent email to $destination");
         } catch (Exception $e) {
             error_log("sendEmail.php got an error -> Error: {$mail->ErrorInfo}");
         }

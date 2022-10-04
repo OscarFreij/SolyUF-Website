@@ -52,11 +52,55 @@ else // Callback functions that require no authentication.
                 return;
             }
             break;
-        case 'addToCart':
-            http_response_code(501);
-            break;
-        case 'removeFromCart':
-            http_response_code(501);
+        case 'editCart':
+            if (isset($_POST['itemId']) && isset($_POST['itemCount']))
+            {
+                http_response_code(202);
+                if (isset($_SESSION['cart']))
+                {
+                    $itemIsNew = true;
+                    for ($i=0; $i < count($_SESSION['cart']); $i++) { 
+                        if ($_SESSION['cart'][$i]['id'] == $_POST['itemId'])
+                        {
+                            $_SESSION['cart'][$i]['count'] = $_POST['itemCount'];
+                            $itemIsNew = false;
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
+                    if ($itemIsNew)
+                    {
+                        array_push($_SESSION['cart'], array("id"=>$_POST['itemId'], "count"=>$_POST['itemCount']));
+                    }
+                    
+
+                    
+                    $tempCart = Array();
+
+                    for ($i=0; $i < count($_SESSION['cart']); $i++) { 
+                        if ($_SESSION['cart'][$i]['count'] > 0)
+                        {
+                            array_push($tempCart, $_SESSION['cart'][$i]);
+                        }
+                    }
+
+                    $_SESSION['cart'] = $tempCart;
+                }
+                else
+                {
+                    $_SESSION['cart'] = Array();
+                    array_push($_SESSION['cart'], array("id"=>$_POST['itemId'], "count"=>$_POST['itemCount']));
+                }
+            }
+            else
+            {
+                http_response_code(400);
+                return;
+            }
             break;
         case 'placeOrder':
             http_response_code(501);

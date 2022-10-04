@@ -12,7 +12,7 @@ if (!isset($container))
 
 if (isset($_SERVER['PHP_AUTH_USER'])) // Callback functions that require client to be authenticated.
 {
-    switch ($_GET['action']) {
+    switch ($_POST['action']) {
         case 'addProduct':
             http_response_code(501);
             break;
@@ -39,7 +39,7 @@ if (isset($_SERVER['PHP_AUTH_USER'])) // Callback functions that require client 
 }
 else // Callback functions that require no authentication.
 {
-    switch ($_GET['action']) {
+    switch ($_POST['action']) {
         case 'contactForm':
             if (isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['message']))
             {

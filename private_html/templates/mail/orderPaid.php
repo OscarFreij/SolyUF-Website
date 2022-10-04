@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <h1>Order #<b><?=$orderNumber?></b> betalad!</h1>
+    <h1>Order #<b><?=$orderId?></b> betalad!</h1>
     <p>Din order är nu betalad och förbereds att skickas till dig.</p>
     <br>
     <a href="https://solyuf.offthegridcg.me/?page=order&orderid=<?=$orderId?>">Klicka här för att komma till din order</a>

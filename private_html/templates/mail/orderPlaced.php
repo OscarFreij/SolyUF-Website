@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-<h1>Order #<b><?=$orderNumber?></b> registrerad!</h1>
+<h1>Order #<b><?=$orderId?></b> registrerad!</h1>
     <p>Din order är nu registrerad hos oss med nedan uppgifter</p>
     <p><b>Mejladress:</b> <?=$email?></p>
     <p><b>Telefonnummer:</b> <?=$phonenumber?></p>

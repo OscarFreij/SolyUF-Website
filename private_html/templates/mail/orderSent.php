@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <h1>Order #<b><?=$orderNumber?></b> skickad!</h1>
+    <h1>Order #<b><?=$orderId?></b> skickad!</h1>
     <p>Din order är nu skickad till nedan adress</p>
     <p><?=$address?>, <?=$postalcode?> <?=$city?></p>
     <br>

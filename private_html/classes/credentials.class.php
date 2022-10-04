@@ -11,7 +11,7 @@ class credentials
 
     public function getDBCredentials()
     {
-        $data = $this->readFileData("../private_html/access.json");
+        $data = $this->readFileData("../private_html/.access.json");
         $this->dbCredentials = array("servername" => $data->servername,"username" => $data->dbUsername, "password" => $data->dbPassword, "dbname" => $data->dbName);
         return $this->dbCredentials;
     }

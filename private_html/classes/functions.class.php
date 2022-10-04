@@ -36,11 +36,11 @@ class functions
             $stmt->bindParam(':image', $image);
             $stmt->bindParam(':price', $price);
             $stmt->execute();
-            echo "New record created successfully";
+            error_log("New record created successfully");
         }
         catch(PDOException $e)
         {
-            echo "Error: " . $e->getMessage();
+            error_log( "Error: " . $e->getMessage());
         }
     }
 
@@ -52,11 +52,12 @@ class functions
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
-            echo count($result)." record/s selected successfully";
+            error_log( count($result)." record/s selected successfully");
+            return $result;
         }
         catch(PDOException $e)
         {
-            echo "Error: " . $e->getMessage();
+            error_log( "Error: " . $e->getMessage());
         }
     }
 
@@ -66,14 +67,16 @@ class functions
         {
             $stmt = $this->container->DB()->GetPreparedStatement('getItem');
             $stmt->bindParam(':id', $id);
+            error_log($stmt->queryString);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
-            echo count($result)." record/s selected successfully";
+            error_log( count($result)." record/s selected successfully");
+            return $result[0];
         }
         catch(PDOException $e)
         {
-            echo "Error: " . $e->getMessage();
+            error_log( "Error: " . $e->getMessage());
         }
     }
 
@@ -84,11 +87,11 @@ class functions
             $stmt = $this->container->DB()->GetPreparedStatement('deleteItem');
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            echo "Record successfully deleted";
+            error_log( "Record successfully deleted");
         }
         catch(PDOException $e)
         {
-            echo "Error: " . $e->getMessage();
+            error_log( "Error: " . $e->getMessage());
         }
     }
     #endregion

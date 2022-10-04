@@ -1,3 +1,21 @@
 .dropdown-text  {
-    pointer-events: none;    
+    display: block;
+    width: 100%;
+    padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+    clear: both;
+    font-weight: 400;
+    color: var(--bs-dropdown-link-color);
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+@media screen and (min-width: 720px) {
+    .cart-restrict-list
+    {
+        overflow-y: auto;
+        max-height: 80vh;
+    }
 }

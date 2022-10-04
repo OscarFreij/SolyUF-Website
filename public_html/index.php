@@ -4,8 +4,11 @@
         session_start();
     }
     
-    //require_once "../private_html/container.php";
-    //$container = new container();
+    require_once "../private_html/container.php";
+    if (!isset($container))
+    {
+        $container = new container();
+    }
 ?>
 
 <!doctype html>

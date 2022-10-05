@@ -7,7 +7,7 @@ function addNewToCart(id) {
         {
             if (element.dataset.productid == id)
             {
-                document.querySelector("#cartList").children[0].children[0].children[1].children[2].click();
+                element.children[0].children[1].children[2].click();
                 return;
             }
         }   

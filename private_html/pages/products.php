@@ -4,4 +4,13 @@
             Våra produkter
         </p>
     </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <?php
+            $items = $container->functions()->GetItems();
+            for ($i=0; $i < count($items); $i++) { 
+                $item = $items[$i];
+                include "../private_html/templates/content/product/item.php";
+            }
+        ?>
+    </div>
 </div>

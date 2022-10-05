@@ -12,6 +12,13 @@
     border: 0;
 }
 
+
+.card-image
+{
+    object-fit: cover;
+    height: 360px;
+}
+
 @media screen and (min-width: 720px) {
     .cart-restrict-list
     {

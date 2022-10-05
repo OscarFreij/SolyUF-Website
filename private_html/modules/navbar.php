@@ -28,6 +28,7 @@
                     </a>
                     <ul id="cartList" class="dropdown-menu dropdown-menu-end dropdown-menu-dark cart-restrict-list" aria-labelledby="cart">
                         <?php
+                        $totalPrice = 0;
                         if (isset($_SESSION['cart']) && !is_null($_SESSION['cart'])) {
                             //display cart items
                             if (count($_SESSION['cart']) > 1) {
@@ -37,8 +38,11 @@
                                     $productName = $data['name'];
                                     $price = $data['price'];
                                     $count = $_SESSION['cart'][$i]['count'];
+
+                                    $totalPrice += ((int)$price * (int)$count);
+
                                     include "../private_html/templates/content/cart/item.php";
-                                    if ($i != 0) {
+                                    if (count($_SESSION['cart']) > 0 && $i != count($_SESSION['cart']) - 1) {
                         ?>
                                         <li>
                                             <hr class="dropdown-divider">
@@ -53,6 +57,9 @@
                                 $productName = $data['name'];
                                 $price = $data['price'];
                                 $count = $_SESSION['cart'][$i]['count'];
+
+                                $totalPrice += ((int)$price * (int)$count);
+
                                 include "../private_html/templates/content/cart/item.php";
                             } else {
                                 ?>
@@ -65,6 +72,20 @@
                             ?>
                             <li class="dropdown-text d-flex justify-content-between gap-3">
                                 <span class="text">Inga produkter i varukorgen!<br>Lägg till några från produkt sidan :)</span>
+                            </li>
+                        <?php
+                        }
+                        ?>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <?php
+                        if ($totalPrice > 0) {
+                        ?>
+                            <li class="dropdown-text d-flex justify-content-between gap-3">
+                                <div class="container">
+                                    <span class="col-12">Total: <?= $totalPrice ?> Kr</span>
+                                </div>
                             </li>
                         <?php
                         }

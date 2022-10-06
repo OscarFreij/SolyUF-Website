@@ -75,13 +75,11 @@
                             </li>
                         <?php
                         }
-                        ?>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <?php
                         if ($totalPrice > 0) {
                         ?>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li class="dropdown-text d-flex justify-content-between gap-3">
                                 <div class="container">
                                     <span class="col-12">Total: <?= $totalPrice ?> Kr</span>

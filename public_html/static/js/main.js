@@ -23,5 +23,5 @@ function editCart(el, action) {
     $d1 = id;
     $d2 = newCount;
     $d3 = "editCart";
-    $.post("callback.php", { itemId: $d1, itemCount: $d2, action: $d3 });
+    $.post("callback.php", { itemId: $d1, itemCount: $d2, action: $d3 }, function(data, status) {if (status != 'success'){alert("Action Error: "+status)}});
 }

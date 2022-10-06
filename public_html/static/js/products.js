@@ -16,6 +16,5 @@ function addNewToCart(id) {
     $d1 = id;
     $d2 = 1;
     $d3 = "editCart";
-    $.post("callback.php", { itemId: $d1, itemCount: $d2, action: $d3 });
-    location.reload();
+    $.post("callback.php", { itemId: $d1, itemCount: $d2, action: $d3 }, function(data, status) {if (status != 'success'){alert("Action Error: "+status)}else{location.reload();}});
 }

@@ -24,4 +24,21 @@ function editCart(el, action) {
     $d2 = newCount;
     $d3 = "editCart";
     $.post("callback.php", { itemId: $d1, itemCount: $d2, action: $d3 }, function(data, status) {if (status != 'success'){alert("Action Error: "+status)}});
+    updateTotalPrice();
+}
+
+function updateTotalPrice()
+{
+    var cost = 0;
+    let elements = document.querySelector("#cartList").children;
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        if (element.hasAttribute('data-productid'))
+        {
+            cost += parseInt(element.children[0].children[2].innerText.split(' ')[0]);
+        }   
+    }
+
+    document.getElementById('total-price').innerText = "Total: " + cost + " Kr";
+
 }

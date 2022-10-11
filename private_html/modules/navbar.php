@@ -82,7 +82,7 @@
                             </li>
                             <li class="dropdown-text d-flex justify-content-between gap-3">
                                 <div class="container">
-                                    <span class="col-12">Total: <?= $totalPrice ?> Kr</span>
+                                    <span id="total-price" class="col-12">Total: <?= $totalPrice ?> Kr</span>
                                 </div>
                             </li>
                         <?php

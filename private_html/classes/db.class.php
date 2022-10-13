@@ -49,7 +49,7 @@ class db
                 $stmtString = "SELECT * FROM orders WHERE 1";
                 break;    
             case 'createOrder':
-                $stmtString = "INSERT INTO orders (email, phonenumber, address, postalcode, city, orderData) VALUES (:email, :phonenumber, :address, :postalcode, :city, :orderData); SELECT LAST_INSERT_ID();";
+                $stmtString = "INSERT INTO orders (email, phonenumber, address, postalcode, city, orderData) VALUES (:email, :phonenumber, :address, :postalcode, :city, :orderData);";
                 break;
             case 'toggleOrderPaid':
                 $stmtString = "UPDATE orders SET paid = (:paid) WHERE id = :id";
@@ -65,5 +65,9 @@ class db
         $stmt = $this->pdo->prepare($stmtString);
         return $stmt;
     }
+
+    public function GetLastInsertedId()
+    {
+        return $this->pdo->lastInsertId();
+    }
 }
-?>

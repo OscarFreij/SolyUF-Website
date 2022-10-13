@@ -67,7 +67,6 @@ class functions
         {
             $stmt = $this->container->DB()->GetPreparedStatement('getItem');
             $stmt->bindParam(':id', $id);
-            error_log($stmt->queryString);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
@@ -142,7 +141,6 @@ class functions
         {
             $stmt = $this->container->DB()->GetPreparedStatement('getOrder');
             $stmt->bindParam(':id', $id);
-            error_log($stmt->queryString);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
@@ -162,7 +160,6 @@ class functions
             $stmt = $this->container->DB()->GetPreparedStatement('toggleOrderPaid');
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':paid', $paid);
-            error_log($stmt->queryString);
             $stmt->execute();
             error_log("Record alterd successfully");
         }
@@ -179,7 +176,6 @@ class functions
             $stmt = $this->container->DB()->GetPreparedStatement('toggleOrderSent');
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':sent', $sent);
-            error_log($stmt->queryString);
             $stmt->execute();
             error_log("Record alterd successfully");
         }

@@ -97,7 +97,97 @@ class functions
     #endregion
 
     #region Orders
+    public function CreateOrder($email, $phonenumber, $address, $postalcode, $city, $orderData)
+    {
+        try
+        {
+            $stmt = $this->container->DB()->GetPreparedStatement('createOrder');
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':phonenumber', $phonenumber);
+            $stmt->bindParam(':address', $address);
+            $stmt->bindParam(':postalcode', $postalcode);
+            $stmt->bindParam(':city', $city);
+            $stmt->bindParam(':orderData', $orderData);
+            $stmt->execute();
+            error_log("New record created successfully");
+            $_SESSION['cart'] = null; // Clear cart when order is created //
+            return $this->container->db()->GetLastInsertedId();
+        }
+        catch(PDOException $e)
+        {
+            error_log( "Error: " . $e->getMessage());
+        }
+    }
 
+    public function GetOrders()
+    {
+        try
+        {
+            $stmt = $this->container->DB()->GetPreparedStatement('getOrders');
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            error_log( count($result)." record/s selected successfully");
+            return $result;
+        }
+        catch(PDOException $e)
+        {
+            error_log( "Error: " . $e->getMessage());
+        }
+    }
+
+    public function GetOrder($id)
+    {
+        try
+        {
+            $stmt = $this->container->DB()->GetPreparedStatement('getOrder');
+            $stmt->bindParam(':id', $id);
+            error_log($stmt->queryString);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            error_log( count($result)." record/s selected successfully");
+            return $result[0];
+        }
+        catch(PDOException $e)
+        {
+            error_log( "Error: " . $e->getMessage());
+        }
+    }
+
+    public function ToggleOrderPaid($id, bool $paid)
+    {
+        try
+        {
+            $stmt = $this->container->DB()->GetPreparedStatement('toggleOrderPaid');
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':paid', $paid);
+            error_log($stmt->queryString);
+            $stmt->execute();
+            error_log("Record alterd successfully");
+        }
+        catch(PDOException $e)
+        {
+            error_log( "Error: " . $e->getMessage());
+        }
+    }
+
+    public function ToggleOrderSent($id, bool $sent)
+    {
+        try
+        {
+            $stmt = $this->container->DB()->GetPreparedStatement('toggleOrderSent');
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':sent', $sent);
+            error_log($stmt->queryString);
+            $stmt->execute();
+            error_log("Record alterd successfully");
+        }
+        catch(PDOException $e)
+        {
+            error_log( "Error: " . $e->getMessage());
+        }
+    }
     #endregion
 
     #region Contact Form & Mail
@@ -233,4 +323,3 @@ class functions
     #endregion
 
 }
-?>

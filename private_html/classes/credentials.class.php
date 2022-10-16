@@ -23,6 +23,13 @@ class credentials
         return $this->mailCredentials;
     }
 
+    public function getSwishCredentials()
+    {
+        $data = $this->readFileData("../private_html/.access.json");
+        $this->swishCredentials = array("swishPhonenumber" => $data->swishPhonenumber, "swishReceiverName" => $data->swishReceiverName);
+        return $this->swishCredentials;
+    }
+
     private function readFileData($fileToRead)
     {
         // $fileToRead is the absolute path to the file

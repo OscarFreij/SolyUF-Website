@@ -88,8 +88,8 @@ switch ($_POST['action']) {
         break;
     case 'placeOrder':
         http_response_code(202);
-        if (isset($_POST['orderEmail']) && isset($_POST['orderPhone']) && isset($_POST['orderAddress']) && isset($_POST['orderPostalcode']) && isset($_POST['orderCity']) && isset($_SESSION['cart'])) {
-            $orderId = $container->functions()->CreateOrder($_POST['orderEmail'], $_POST['orderPhone'], $_POST['orderAddress'], $_POST['orderPostalcode'], $_POST['orderCity'], json_encode($_SESSION['cart']));
+        if (isset($_POST['orderEmail']) && isset($_POST['orderPhone']) && isset($_POST['orderAddress']) && isset($_POST['orderPostalcode']) && isset($_POST['orderCity']) && isset($_SESSION['cart']) && isset($_SESSION['totalPrice'])) {
+            $orderId = $container->functions()->CreateOrder($_POST['orderEmail'], $_POST['orderPhone'], $_POST['orderAddress'], $_POST['orderPostalcode'], $_POST['orderCity'], json_encode($_SESSION['cart']), $_SESSION['totalPrice']);
             echo ($orderId);
         } else {
             http_response_code(400);

@@ -26,3 +26,11 @@
         max-height: 80vh;
     }
 }
+
+.swish-qr
+{
+    image-rendering: pixelated;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}

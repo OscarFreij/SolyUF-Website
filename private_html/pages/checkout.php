@@ -31,6 +31,7 @@
                     $totalPrice += ((int)$price * (int)$count);
                 }
             }
+            $_SESSION['totalPrice'] = $totalPrice;
             ?>
         </div>
     </div>

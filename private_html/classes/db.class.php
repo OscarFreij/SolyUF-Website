@@ -49,7 +49,7 @@ class db
                 $stmtString = "SELECT * FROM orders WHERE 1";
                 break;    
             case 'createOrder':
-                $stmtString = "INSERT INTO orders (email, phonenumber, address, postalcode, city, orderData) VALUES (:email, :phonenumber, :address, :postalcode, :city, :orderData);";
+                $stmtString = "INSERT INTO orders (email, phonenumber, address, postalcode, city, orderData, totalPrice) VALUES (:email, :phonenumber, :address, :postalcode, :city, :orderData, :totalPrice);";
                 break;
             case 'toggleOrderPaid':
                 $stmtString = "UPDATE orders SET paid = (:paid) WHERE id = :id";

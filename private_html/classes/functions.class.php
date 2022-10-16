@@ -96,7 +96,7 @@ class functions
     #endregion
 
     #region Orders
-    public function CreateOrder($email, $phonenumber, $address, $postalcode, $city, $orderData)
+    public function CreateOrder($email, $phonenumber, $address, $postalcode, $city, $orderData, $totalPrice)
     {
         try
         {
@@ -107,6 +107,7 @@ class functions
             $stmt->bindParam(':postalcode', $postalcode);
             $stmt->bindParam(':city', $city);
             $stmt->bindParam(':orderData', $orderData);
+            $stmt->bindParam(':totalPrice', $totalPrice);
             $stmt->execute();
             error_log("New record created successfully");
             $_SESSION['cart'] = null; // Clear cart when order is created //

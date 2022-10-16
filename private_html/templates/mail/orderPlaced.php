@@ -51,7 +51,7 @@
         <?=$orderTableRows?>
     </table>
     <br>
-    <h3>För att betala klickar du på länken nedan så kan du betala med Swish</h3>
+    <h3>För att se din order och betala (med Swish) så klickar du på länken nedan</h3>
     <a href="https://solyuf.offthegridcg.me/?page=order&orderid=<?=$orderId?>">Klicka här för att komma till din order</a>
     <br>
     <p><b>Om du inte lagt denna order ber vi dig svara på detta mejlet omgående så vi kan avbryta den</b></p>

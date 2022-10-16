@@ -1,5 +1,5 @@
 <?php
-$order = $container->functions()->GetOrder($_GET['orderId']);
+$order = $container->functions()->GetOrder($_GET['orderid']);
 $swishCredentials = $container->credentials()->getSwishCredentials();
 if ($order['paid']) {
     $paid = '<span class="text-success">Ja</span>';
@@ -16,7 +16,7 @@ if ($order['sent']) {
 <div class="container py-5">
     <div class="row my-3">
         <p class="fs-1 text-center text">
-            Beställning: #<?= $_GET['orderId'] ?>
+            Beställning: #<?= $_GET['orderid'] ?>
         </p>
     </div>
     <div class="row mb-3 text text-center">
@@ -53,7 +53,7 @@ if ($order['sent']) {
         <div class="row mb-3 text text-center">
             <span>Betala genom att skanna nedan QR kod med swish.<br>Betalningshantering och verifiering är <b>manuel</b> och dycker därför inte upp direkt när du betalar.</span>
             <span>Kontrolera att mottagare står som "<b><?= $swishCredentials['swishReceiverName'] ?></b>" när du genomför betallningen!</span>
-            <img class="swish-qr" src="<?= $container->functions()->GenerateQRCode($swishCredentials['swishPhonenumber'], $order['totalPrice'], $_GET['orderId']); ?>">
+            <img class="swish-qr" src="<?= $container->functions()->GenerateQRCode($swishCredentials['swishPhonenumber'], $order['totalPrice'], $_GET['orderid']); ?>">
         </div>
     <?php
     }

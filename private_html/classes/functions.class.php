@@ -110,7 +110,6 @@ class functions
             $stmt->bindParam(':totalPrice', $totalPrice);
             $stmt->execute();
             error_log("New record created successfully");
-            $_SESSION['cart'] = null; // Clear cart when order is created //
             return $this->container->db()->GetLastInsertedId();
         }
         catch(PDOException $e)
@@ -306,6 +305,25 @@ class functions
         } catch (Exception $e) {
             error_log("sendEmail.php got an error -> Error: {$mail->ErrorInfo}");
         }
+    }
+
+    public function GenerateOrderTableRows(array $cart)
+    {
+        error_log(print_r($cart, true));
+        
+        $rows = "";
+
+        for ($i=0; $i < count($cart); $i++) { 
+            $item = $cart[$i];
+            $itemName = $this->GetItem($item['id'])['name'];
+            $itemCount = $item['count'];
+            $row = "<tr>";
+            $row = $row."<td>$itemName</td>";
+            $row = $row."<td>$itemCount</td>";
+            $row = $row."</tr>";
+            $rows = $rows.$row;
+        }
+        return $rows;
     }
 
     #endregion

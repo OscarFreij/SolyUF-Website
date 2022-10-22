@@ -14,25 +14,51 @@ if (isset($_SERVER['PHP_AUTH_USER'])) // Callback functions that require client 
     switch ($_POST['action']) {
         case 'addProduct':
             http_response_code(501);
+            return;
             break;
 
         case 'editProduct':
             http_response_code(501);
+            return;
             break;
 
         case 'removeProduct':
             http_response_code(501);
+            return;
             break;
 
         case 'toggleOrderSent':
-            http_response_code(501);
+            if (isset($_POST['orderId']))
+            {
+                $container->functions()->ToggleOrderSent($_POST['orderId'], true); // Currently only allow TRUE //
+                $order = $container->functions()->GetOrder($_POST['orderId']);
+                $container->functions()->sendOrderSentEmail($order['id'],$order['email'],$order['address'],$order['postalcode'],$order['city']);
+                http_response_code(200);
+                return;
+            }
+            else
+            {
+                http_response_code(400);
+            }
             break;
 
         case 'toggleOrderPaid':
-            http_response_code(501);
+            if (isset($_POST['orderId']))
+            {
+                $container->functions()->ToggleOrderPaid($_POST['orderId'], true); // Currently only allow TRUE //
+                $order = $container->functions()->GetOrder($_POST['orderId']);
+                $container->functions()->sendOrderPaidEmail($order['id'],$order['email']);
+                http_response_code(200);
+                return;
+            }
+            else
+            {
+                http_response_code(400);
+            }
             break;
         default:
             http_response_code(400);
+            return;
             break;
     }
 }
@@ -100,5 +126,6 @@ switch ($_POST['action']) {
         break;
     default:
         http_response_code(400);
+        return;
         break;
 }

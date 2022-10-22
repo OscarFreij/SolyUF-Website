@@ -9,7 +9,10 @@
             $items = $container->functions()->GetItems();
             for ($i=0; $i < count($items); $i++) { 
                 $item = $items[$i];
-                include "../private_html/templates/content/product/item.php";
+                if ($item['visible'])
+                {
+                    include "../private_html/templates/content/product/item.php";
+                }
             }
         ?>
     </div>

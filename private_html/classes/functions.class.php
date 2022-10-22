@@ -227,7 +227,7 @@ class functions
         $subject = "Soly UF - Beställning skickad - Order #$orderId";
         
         ob_start();
-        include "../private_html/templates/mail/orderPlaced.php";
+        include "../private_html/templates/mail/orderSent.php";
         $msg = ob_get_clean();
         $this->SendEmail(null, $email, $subject, $msg);
     }

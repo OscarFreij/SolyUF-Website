@@ -204,7 +204,7 @@ class functions
 
     public function sendOrderPaidEmail(int $orderId, string $email)
     {
-        $subject = "Soly UF - Betalning bekreftad - Order #$orderId";
+        $subject = "Soly UF - Betalning bekräftad - Order #$orderId";
         
         ob_start();
         include "../private_html/templates/mail/orderPaid.php";

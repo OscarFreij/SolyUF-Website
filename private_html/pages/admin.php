@@ -18,6 +18,13 @@
             ?>
         </div>
     </div>
+    <div class="row my-3">
+        <div class="container">
+            <button class="btn btn-success col-12" data-bs-toggle="modal" data-bs-target="#createProductModal">
+                Lägg till produkt
+            </button>
+        </div>
+    </div>
 </div>
 
 <?php

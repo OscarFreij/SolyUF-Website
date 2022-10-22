@@ -13,7 +13,15 @@ if (isset($_SERVER['PHP_AUTH_USER'])) // Callback functions that require client 
 {
     switch ($_POST['action']) {
         case 'addProduct':
-            http_response_code(501);
+            if (isset($_POST['name']) && isset($_POST['imageData']) && isset($_POST['description']) && isset($_POST['price']))
+            {
+                $container->functions()->CreateItem($_POST['name'],$_POST['description'], $_POST['imageData'], $_POST['price']);
+                http_response_code(201);
+            }
+            else
+            {
+                http_response_code(400);
+            }
             return;
             break;
 

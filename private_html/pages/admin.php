@@ -20,13 +20,19 @@
     </div>
     <div class="row my-3">
         <div class="container">
-            <button class="btn btn-success col-12" data-bs-toggle="modal" data-bs-target="#createProductModal">
+            <div class="row justify-content-around">
+            <button class="btn btn-success col-5" data-bs-toggle="modal" data-bs-target="#createProductModal">
                 Lägg till produkt
             </button>
+            <button class="btn btn-success col-5" data-bs-toggle="modal" data-bs-target="#createImageModal">
+                Lägg till bild
+            </button>
+            </div>
         </div>
     </div>
 </div>
 
 <?php
     require "../private_html/templates/modal/admin/createProduct.php";
+    require "../private_html/templates/modal/admin/createImage.php";
 ?>

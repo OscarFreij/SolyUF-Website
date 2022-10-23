@@ -15,8 +15,8 @@
 
 .card-image
 {
-    object-fit: cover;
-    height: 280px;
+    object-fit: scale-down;
+    height: 300px;
 }
 
 @media screen and (min-width: 720px) {

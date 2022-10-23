@@ -12,8 +12,8 @@
                     <input type="text" class="form-control" id="createProductModalInputTitle" name="name" placeholder="Produktnamn">
                 </div>
                 <div class="mb-3">
-                    <label for="createProductModalInputImage" class="form-label">Bild</label>
-                    <input type="file" class="form-control" id="createProductModalInputImage" name="image">
+                    <label for="createProductModalInputImage" class="form-label">Bilder</label>
+                    <input type="text" class="form-control" id="createProductModalInputImage" name="image">
                 </div>
                 <div class="mb-3">
                     <label for="createProductModalInputDescription" class="form-label">Beskrivning</label>

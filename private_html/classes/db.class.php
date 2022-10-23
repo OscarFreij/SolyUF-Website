@@ -37,7 +37,7 @@ class db
                 $stmtString = "SELECT * FROM items WHERE 1";
                 break;
             case 'createItem':
-                $stmtString = "INSERT INTO items (name, description, image, price) VALUES (:name, :description, :image, :price)";
+                $stmtString = "INSERT INTO items (name, description, imageCSV, price) VALUES (:name, :description, :imageCSV, :price)";
                 break;
             case 'deleteItems':
                 $stmtString = "DELETE FROM items WHERE `id` = :id";
@@ -56,6 +56,12 @@ class db
                 break;
             case 'toggleOrderSent':
                 $stmtString = "UPDATE orders SET sent = (:sent) WHERE id = :id";
+                break;
+            case 'getImage':
+                $stmtString = "SELECT * FROM images WHERE `id` = :id";
+                break;
+            case 'createImage':
+                $stmtString = "INSERT INTO images (data) VALUES (:data)";
                 break;
             default:
                 throw new Exception("No prepared statement with matching name - (statementName):$statementName", 210);

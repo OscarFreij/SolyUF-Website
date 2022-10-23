@@ -28,12 +28,7 @@ function confirmSent(id)
 async function createProduct()
 {
     let name = document.getElementById('createProductModalInputTitle').value;
-    let imageData = "";
-    let imageFile = document.getElementById('createProductModalInputImage').files[0];
-    if (typeof imageFile != "undefined")
-    {
-        imageData = btoa(encodeURIComponent(await readFileAsDataURL(imageFile)));
-    }
+    let imageData = document.getElementById('createProductModalInputImage').value;
     let description = document.getElementById('createProductModalInputDescription').value;
     let price = document.getElementById('createProductModalInputPrice').value;
 
@@ -42,7 +37,22 @@ async function createProduct()
     $d3 = description;
     $d4 = price;
     $d5 = "addProduct";
-    $.post("callback.php", { name: $d1, imageData: $d2, description: $d3, price: $d4, action: $d5 }, function(data, status) {if (status != 'success'){alert("Action Error: "+status)}else{location.reload();}});
+    $.post("callback.php", { name: $d1, imageCSV: $d2, description: $d3, price: $d4, action: $d5 }, function(data, status) {if (status != 'success'){alert("Action Error: "+status)}else{location.reload();}});
+}
+
+
+async function createImage()
+{
+    let imageData = "";
+    let imageFile = document.getElementById('createImageModalInputImage').files[0];
+    if (typeof imageFile != "undefined")
+    {
+        imageData = btoa(encodeURIComponent(await readFileAsDataURL(imageFile)));
+    }
+
+    $d1 = imageData;
+    $d2 = "addImage";
+    $.post("callback.php", { data: $d1,action: $d2 }, function(data, status) {if (status != 'success'){alert("Action Error: "+status)}else{location.reload();}});
 }
 
 

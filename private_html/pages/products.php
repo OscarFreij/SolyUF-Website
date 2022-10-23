@@ -4,14 +4,14 @@
             Våra produkter
         </p>
     </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
         <?php
             $items = $container->functions()->GetItems();
             for ($i=0; $i < count($items); $i++) { 
                 $item = $items[$i];
                 if ($item['visible'])
                 {
-                    include "../private_html/templates/content/product/item.php";
+                    require "../private_html/templates/content/product/item.php";
                 }
             }
         ?>

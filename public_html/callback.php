@@ -13,9 +13,9 @@ if (isset($_SERVER['PHP_AUTH_USER'])) // Callback functions that require client 
 {
     switch ($_POST['action']) {
         case 'addProduct':
-            if (isset($_POST['name']) && isset($_POST['imageData']) && isset($_POST['description']) && isset($_POST['price']))
+            if (isset($_POST['name']) && isset($_POST['imageCSV']) && isset($_POST['description']) && isset($_POST['price']))
             {
-                $container->functions()->CreateItem($_POST['name'],$_POST['description'], $_POST['imageData'], $_POST['price']);
+                $container->functions()->CreateItem($_POST['name'],$_POST['description'], $_POST['imageCSV'], $_POST['price']);
                 http_response_code(201);
             }
             else
@@ -57,6 +57,18 @@ if (isset($_SERVER['PHP_AUTH_USER'])) // Callback functions that require client 
                 $order = $container->functions()->GetOrder($_POST['orderId']);
                 $container->functions()->sendOrderPaidEmail($order['id'],$order['email']);
                 http_response_code(200);
+                return;
+            }
+            else
+            {
+                http_response_code(400);
+            }
+            break;
+        case 'addImage':
+            if (isset($_POST['data']))
+            {
+                $container->functions()->CreateImage($_POST['data']);
+                http_response_code(201);
                 return;
             }
             else

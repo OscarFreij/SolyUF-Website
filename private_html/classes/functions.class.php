@@ -33,7 +33,7 @@ class functions
             $stmt = $this->container->DB()->GetPreparedStatement('createItem');
             $stmt->bindParam(':name', $name);
             $stmt->bindParam(':description', $description);
-            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':imageCSV', $image);
             $stmt->bindParam(':price', $price);
             $stmt->execute();
             error_log("New record created successfully");
@@ -178,6 +178,40 @@ class functions
             $stmt->bindParam(':sent', $sent);
             $stmt->execute();
             error_log("Record alterd successfully");
+        }
+        catch(PDOException $e)
+        {
+            error_log( "Error: " . $e->getMessage());
+        }
+    }
+    #endregion
+
+    #region Images
+    public function CreateImage($image)
+    {
+        try
+        {
+            $stmt = $this->container->DB()->GetPreparedStatement('createImage');
+            $stmt->bindParam(':data', $image);
+            $stmt->execute();
+            error_log("New record created successfully");
+        }
+        catch(PDOException $e)
+        {
+            error_log( "Error: " . $e->getMessage());
+        }
+    }
+    public function GetImage($id)
+    {
+        try
+        {
+            $stmt = $this->container->DB()->GetPreparedStatement('getImage');
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            error_log( count($result)." record/s selected successfully");
+            return $result[0];
         }
         catch(PDOException $e)
         {

@@ -5,3 +5,4 @@ todo
 composer.lock
 vendor
 .vscode
+public_html/static/images/products/*

@@ -13,14 +13,14 @@
         <?php
         } else if (!strpos($item['imageCSV'], ',')) {
         ?>
-            <img class="card-img-top card-image" src="<?= urldecode(base64_decode($container->functions()->GetImage($item['imageCSV'])['data'])) ?>" alt="pictue of product">
+            <img class="card-img-top card-image" src="static/images/products/<?=$item['imageCSV']?>.jpeg" alt="pictue of product">
         <?php
         } else {
             $imageIds = explode(',', $item['imageCSV']);
         ?>
             <div id="product<?= $item['id'] ?>Carousel" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#product<?= $item['id'] ?>Carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#product<?= $item['id']?>Carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     <?php
                         for ($j = 1; $j < count($imageIds); $j++)
                         {
@@ -33,15 +33,14 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="<?= urldecode(base64_decode($container->functions()->GetImage($imageIds[0])['data'])) ?>" class="d-block w-100 card-img-top card-image bg-dark" alt="...">
+                        <img src="static/images/products/<?=$imageIds[0]?>.jpeg" class="d-block w-100 card-img-top card-image bg-dark" alt="...">
                     </div>
                     <?php
                     for ($j = 1; $j < count($imageIds); $j++)
                     {
-                        $image = urldecode(base64_decode($container->functions()->GetImage($imageIds[$j])['data']));
                         ?>
                         <div class="carousel-item">
-                            <img src="<?= $image ?>" class="d-block w-100 card-img-top card-image bg-dark" alt="...">
+                            <img src="static/images/products/<?=$imageIds[$j]?>.jpeg" class="d-block w-100 card-img-top card-image bg-dark" alt="...">
                         </div>
                         <?php
                     }

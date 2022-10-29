@@ -18,6 +18,7 @@
             ?>
         </div>
     </div>
+    <!--
     <div class="row my-3">
         <div class="container">
             <div class="row justify-content-around">
@@ -30,6 +31,7 @@
             </div>
         </div>
     </div>
+    -->
 </div>
 
 <?php

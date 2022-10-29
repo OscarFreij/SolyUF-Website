@@ -1,5 +1,5 @@
 function addNewToCart(id) {
-
+    alert("Produkt lagd i varukorgen!");
     let elements = document.querySelector("#cartList").children;
     for (let i = 0; i < elements.length; i++) {
         const element = elements[i];

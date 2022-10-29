@@ -78,7 +78,6 @@ if (isset($_SERVER['PHP_AUTH_USER'])) // Callback functions that require client 
             break;
         default:
             http_response_code(400);
-            return;
             break;
     }
 }

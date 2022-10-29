@@ -51,8 +51,8 @@ if ($order['sent']) {
     if (!$order['paid']) {
     ?>
         <div class="row mb-3 text text-center">
-            <span>Betala genom att skanna nedan QR kod med swish.<br>Betalningshantering och verifiering är <b>manuel</b> och dycker därför inte upp direkt när du betalar.</span>
-            <span>Kontrolera att mottagare står som "<b><?= $swishCredentials['swishReceiverName'] ?></b>" när du genomför betallningen!</span>
+            <span>Betala genom att skanna nedan QR kod med swish.<br>Betalningshantering och verifiering är <b>manuell</b> och dycker därför inte upp direkt när du betalar.</span>
+            <span>Kontrollera att mottagare står som "<b><?= $swishCredentials['swishReceiverName'] ?></b>" när du genomför betalningen!</span>
             <img class="swish-qr" src="<?= $container->functions()->GenerateQRCode($swishCredentials['swishPhonenumber'], $order['totalPrice'], $_GET['orderid']); ?>">
         </div>
     <?php

@@ -7,7 +7,7 @@ function placeOrder() {
     orderObject.orderCity = document.getElementById('confirmOrderModalInputCity').value;
     orderObject.action = "placeOrder";
 
-    if (validateInput(orderObject))
+    if (!validateInput(orderObject))
     {
         // Validity check failed, abort order placement. //
         return;

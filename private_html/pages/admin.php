@@ -10,6 +10,10 @@
         </p>
     </div>
     <div class="row my-3">
+        <?php
+            if (count($orders) > 0)
+            {
+        ?>
         <div class="accordion" id="orderAccordion">
             <?php
                 foreach ($orders as $key => $order) {
@@ -17,6 +21,17 @@
                 }
             ?>
         </div>
+        <?php
+            }
+            else
+            {
+        ?>
+        <p class="fs-3 text-center text">
+            Inga bestälningar hittades!
+        </p>
+        <?php
+            }
+        ?>
     </div>
     <!--
     <div class="row my-3">

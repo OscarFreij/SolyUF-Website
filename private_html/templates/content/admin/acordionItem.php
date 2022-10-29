@@ -22,6 +22,11 @@ if ($order['sent']) {
             <div class="row mb-3 text text-center">
                 <span>Betalad: <?= $paid ?> | Skickad: <?= $sent ?></span>
             </div>
+            <div class="row mb-3 text-center">
+                <span class="text">Email: <?=$order['email']?></span>
+                <span class="text">Telefonnummer: <?=$order['phonenumber']?></span>
+                <span class="text">Adress: <?=$order['address']?>, <?=$order['postalcode']?>, <?=$order['city']?></span>
+            </div>
             <div class="row mb-3">
                 <div id="product-list" class="container fs-5">
                     <div class="product-list-header container row text border-bottom border-dark border-2 text-center text-sm-start mx-0">

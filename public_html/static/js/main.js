@@ -1,7 +1,14 @@
 function editCart(el, action) {
     switch (action) {
         case '-':
-            el.parentElement.children[1].value--;
+            if (el.parentElement.children[1].value > 0)
+            {
+                el.parentElement.children[1].value--;
+            }
+            else
+            {
+                return;
+            }
             break;
         case '+':
             el.parentElement.children[1].value++;
@@ -35,7 +42,7 @@ function updateTotalPrice()
         const element = elements[i];
         if (element.hasAttribute('data-productid'))
         {
-            cost += parseInt(element.children[0].children[2].innerText.split(' ')[0]);
+            cost += parseInt(element.dataset.productprice * element.querySelector('input').value);
         }   
     }
 

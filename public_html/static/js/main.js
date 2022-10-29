@@ -42,7 +42,9 @@ function updateTotalPrice()
         const element = elements[i];
         if (element.hasAttribute('data-productid'))
         {
-            cost += parseInt(element.dataset.productprice * element.querySelector('input').value);
+            numberOfItems = element.querySelector('input').value;
+            productPrice = element.dataset.productprice;
+            cost += parseInt(productPrice * numberOfItems);
         }   
     }
 

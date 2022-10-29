@@ -1,23 +1,28 @@
 function placeOrder() {
-    $d1 = document.getElementById('confirmOrderModalInputEmail').value;
-    $d2 = document.getElementById('confirmOrderModalInputPhone').value;
-    $d3 = document.getElementById('confirmOrderModalInputAdress').value;
-    $d4 = document.getElementById('confirmOrderModalInputPostalCode').value;
-    $d5 = document.getElementById('confirmOrderModalInputCity').value;
-    $d6 = "placeOrder";
+    let orderObject = new Object();
+    orderObject.orderEmail = document.getElementById('confirmOrderModalInputEmail').value;
+    orderObject.orderPhone = document.getElementById('confirmOrderModalInputPhone').value;
+    orderObject.orderAddress = document.getElementById('confirmOrderModalInputAdress').value;
+    orderObject.orderPostalcode = document.getElementById('confirmOrderModalInputPostalCode').value.replace(/\s/g, '');
+    orderObject.orderCity = document.getElementById('confirmOrderModalInputCity').value;
+    orderObject.action = "placeOrder";
 
-    $s1 = validateEmail(document.getElementById('confirmOrderModalInputEmail').value);
-    $s2 = validatePhone(document.getElementById('confirmOrderModalInputPhone').value);
-    $s3 = validateAddress(document.getElementById('confirmOrderModalInputAdress').value);
-    $s4 = validatePostalcode(document.getElementById('confirmOrderModalInputPostalCode').value);
-    
-    if (!$s1 || !$s2 || !$s3 || !$s4)
+    if (validateInput(orderObject))
     {
         // Validity check failed, abort order placement. //
         return;
     }
 
-    $.post("callback.php", { orderEmail: $d1, orderPhone: $d2, orderAddress: $d3, orderPostalcode: $d4, orderCity: $d5, action: $d6 }, function(data, status) {if (status != 'success'){alert("Action Error: "+status)}else{window.location.href = window.location.origin+"/?page=order&orderid="+data;}});
+    $.post("callback.php", orderObject, function(data, status) {if (status != 'success'){alert("Action Error: "+status)}else{window.location.href = window.location.origin+"/?page=order&orderid="+data;}});
+}
+
+function validateInput(obj)
+{
+    if (validatePhone(obj.orderPhone) && validateEmail(obj.orderEmail) && validateAddress(obj.orderAddress) && validatePostalcode(obj.orderPostalcode))
+    {
+        return true;
+    }
+    return false;
 }
 
 

@@ -266,6 +266,19 @@ class functions
         $this->SendEmail(null, $email, $subject, $msg);
     }
 
+    public function sendNewOrderEmail()
+    {
+        $subject = "Soly UF - Ny beställning mottagen!";
+     
+        $credArray = $this->container->credentials()->getMailCredentials();
+        $email = $credArray['emailReceivers'];
+
+        ob_start();
+        include "../private_html/templates/mail/newOrder.php";
+        $msg = ob_get_clean();
+        $this->SendEmail(null, $email, $subject, $msg);
+    }
+
     private function SendEmail(string $reply = null, string $destination, string $subject, string $message, array $credArray = null)
     {
         if (is_null($credArray))

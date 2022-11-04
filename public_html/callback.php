@@ -136,6 +136,7 @@ switch ($_POST['action']) {
         if (isset($_POST['orderEmail']) && isset($_POST['orderPhone']) && isset($_POST['orderAddress']) && isset($_POST['orderPostalcode']) && isset($_POST['orderCity']) && isset($_SESSION['cart']) && isset($_SESSION['totalPrice'])) {
             $orderId = $container->functions()->CreateOrder($_POST['orderEmail'], $_POST['orderPhone'], $_POST['orderAddress'], $_POST['orderPostalcode'], $_POST['orderCity'], json_encode($_SESSION['cart']), $_SESSION['totalPrice']);
             $container->functions()->sendOrderPlacedEmail($orderId, $_POST['orderEmail'],$_POST['orderPhone'],$_POST['orderAddress'],$_POST['orderPostalcode'],$_POST['orderCity'],$container->functions()->GenerateOrderTableRows($_SESSION['cart']));
+            $container->functions()->sendNewOrderEmail();
             $_SESSION['cart'] = null; // Clear cart when order is created //
             echo ($orderId);
         } else {

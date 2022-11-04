@@ -32,6 +32,7 @@ function editCart(el, action) {
     $d3 = "editCart";
     $.post("callback.php", { itemId: $d1, itemCount: $d2, action: $d3 }, function(data, status) {if (status != 'success'){alert("Action Error: "+status)}});
     updateTotalPrice();
+    updateTotalCount();
 }
 
 function updateTotalPrice()
@@ -51,3 +52,26 @@ function updateTotalPrice()
     document.getElementById('total-price').innerText = "Total: " + cost + " Kr";
 
 }
+
+function updateTotalCount()
+{
+    var count = 0;
+    let elements = document.querySelector("#cartList").children;
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        if (element.hasAttribute('data-productid'))
+        {
+            numberOfItems = element.querySelector('input').value;
+            count += parseInt(numberOfItems);
+        }   
+    }
+    
+    let countElements = document.querySelectorAll(".cart-count");
+    for (let j = 0; j < countElements.length; j++) {
+        const element = countElements[j];
+        element.innerText = count;
+    }
+}
+
+
+updateTotalCount();

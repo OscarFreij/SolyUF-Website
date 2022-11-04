@@ -3,9 +3,23 @@
         <span class="navbar-brand">
             <img src="static/images/soly.png" alt="" width="100" class="d-inline-block align-text-top">
         </span>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div>
+            <?php
+            if (isset($_SESSION['cart']) && !is_null($_SESSION['cart'])) {
+                if (count($_SESSION['cart']) > 0)
+                {
+                    ?>
+                    <span class="text-light pe-2 d-lg-none">
+                        <i class="bi bi-basket2"></i>&nbsp;<span class="cart-count"><?= count($_SESSION['cart']) ?></span>
+                    </span>
+                    <?php
+                }
+            }
+            ?>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
         <div class="collapse navbar-collapse w-100" id="navbarNav">
             <ul class="navbar-nav w-100 justify-content-evenly me-auto mb-2 mb-xl-0">
                 <li class="nav-item">
@@ -24,7 +38,25 @@
             <ul class="navbar-nav w-100 justify-content-end">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="cart" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                        Varukorg
+                    
+                    <?php
+                    if (isset($_SESSION['cart']) && !is_null($_SESSION['cart'])) {
+                        if (count($_SESSION['cart']) > 0)
+                        {
+                            ?>
+                            Varukorg <i class="bi bi-basket2"></i> <span class="cart-count"><?= count($_SESSION['cart']) ?></span>
+                            <?php
+                        }
+                        else
+                        {
+                            echo("Varukorg");
+                        }
+                    }
+                    else
+                    {
+                        echo("Varukorg");
+                    }
+                    ?>
                     </a>
                     <ul id="cartList" class="dropdown-menu dropdown-menu-end dropdown-menu-dark cart-restrict-list" aria-labelledby="cart">
                         <?php

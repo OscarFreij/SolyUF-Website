@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="row mb-3 text text-center">
-        <span>Totalt pris: <?= $totalPrice ?> Kr</span>
+        <span>Totalt pris: <?= $totalPrice ?> Kr (+39Kr frakt)</span>
     </div>
     <div class="row mb-3 w-100 mx-0">
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmOrderModal">

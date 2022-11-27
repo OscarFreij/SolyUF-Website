@@ -49,7 +49,7 @@ function updateTotalPrice()
         }   
     }
 
-    document.getElementById('total-price').innerText = "Total: " + cost + " Kr";
+    document.getElementById('total-price').innerText = "Total: " + cost + " Kr (+39Kr frakt)";
 
 }
 
@@ -75,3 +75,4 @@ function updateTotalCount()
 
 
 updateTotalCount();
+updateTotalPrice();
